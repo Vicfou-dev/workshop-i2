@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<title>View</title>
+
+	<link rel="stylesheet" href="index.css">
+
+</head>
+<body>
+    <div class="container">
+        <h1>Debugger</h1>
+        <form>
+            <div>
+                <span>Longueur de la surface (m) : </span>
+                <input type="text" name="x_wall" value="10">
+            </div>
+            <div>
+                <span>Largeur de la surface (m) : </span>
+                <input type="text" name="y_wall" value="10">
+            </div>
+            <div>
+                <span>Longueur du carreau (m) : </span>
+                <input type="text" name="x_mat" value="1">
+            </div>
+            <div>
+                <span>Largeur du carreau (m) : </span>
+                <input type="text" name="y_mat" value="1">
+            </div>
+            <div>
+                <span>Choix de la découpe : </span>
+                <select id="cut" name="cut">
+                    <option value="no_decoupe">Pas de découpe</option>
+                    <option value="decoupe_eco" selected="selected">Découpe Economique</option>
+                    <option value="decoupe_demi">Découpe Demi</option>
+                    <option value="decoupe_tier">Découpe Tier</option>
+                </select>
+            </div>
+            <div>
+                <button type="submit">Calculer</button>
+            </div>
+        </form>
+
+        <div>
+            <span>Nombre de carreaux Entier : </span>
+            <strong id="nb-carreau-full"></strong>
+        </div>
+        <div>
+            <span>Nombre de carreaux Découper : </span>
+            <strong id="nb-carreau-cut"></strong>
+        </div>
+        <div>
+            <span>Nombre de carreaux Total : </span>
+            <strong id="nb-carreau-all"></strong>
+        </div>
+    </div>
+    <canvas id="canvas" width="600px" height="600px"></canvas>
+</body>
+<script>
+
+    var url = new URL(window.location.href);
+    var x_wall = parseFloat(url.searchParams.get("x_wall") ? url.searchParams.get("x_wall") : document.getElementsByName("x_wall").item(0).value);
+    var y_wall = parseFloat(url.searchParams.get("y_wall") ? url.searchParams.get("y_wall") : document.getElementsByName("y_wall").item(0).value);
+
+    var x_mat = parseFloat(url.searchParams.get("x_mat") ? url.searchParams.get("x_mat") : document.getElementsByName("x_mat").item(0).value);
+    var y_mat = parseFloat(url.searchParams.get("y_mat") ? url.searchParams.get("y_mat") : document.getElementsByName("y_mat").item(0).value);
+
+    document.getElementsByName("x_wall").item(0).value = x_wall;
+    document.getElementsByName("y_wall").item(0).value = y_wall;
+    document.getElementsByName("x_mat").item(0).value = x_mat;
+    document.getElementsByName("y_mat").item(0).value = y_mat;
+    var cut = url.searchParams.get("cut") ? url.searchParams.get("cut") : document.getElementById("cut").value;
+    document.getElementById("cut").value = cut;
+</script>
+<script src="index.js"></script>
+</html>
